@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="log_out" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.UserPageController">
+   <children>
+      <Button fx:id="information" layoutX="555.0" layoutY="544.0" mnemonicParsing="false" onMouseClicked="#getInfo" prefHeight="102.0" prefWidth="366.0" style="-fx-background-color: #b3cde0;" text="your informations">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="borrow_book" layoutX="363.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#borrow" prefHeight="102.0" prefWidth="274.0" style="-fx-background-color: #6497b1;" text="borrow book">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="return_book" layoutX="57.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#returnBook" prefHeight="102.0" prefWidth="274.0" style="-fx-background-color: #6497b1;" text="return book">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="search_book" layoutX="684.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#searchBook" prefHeight="102.0" prefWidth="274.0" style="-fx-background-color: #6497b1;" text="search book">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="increase_balance" layoutX="78.0" layoutY="544.0" mnemonicParsing="false" onMouseClicked="#increaseBalance" prefHeight="102.0" prefWidth="365.0" style="-fx-background-color: #b3cde0;" text="increase balance">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="267.0" fitWidth="336.0" layoutX="332.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="332.0" AnchorPane.rightAnchor="332.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../wlc.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="825.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="35.0" prefWidth="95.0" style="-fx-background-color: #e24739;" text="log out">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.SignupController">
+   <children>
+      <Label layoutX="19.0" layoutY="15.0" prefHeight="466.0" prefWidth="667.0" style="-fx-background-color: #adcbe3;" textFill="#80aaca" />
+      <TextField fx:id="username" layoutX="42.0" layoutY="48.0" promptText="username" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="48.0" />
+      <TextField fx:id="lastname" layoutX="43.0" layoutY="321.0" promptText="last name" AnchorPane.topAnchor="321.0" />
+      <TextField fx:id="firstname" layoutX="42.0" layoutY="257.0" promptText="first name" AnchorPane.topAnchor="257.0" />
+      <TextField fx:id="national_id" layoutX="43.0" layoutY="179.0" promptText="national id" AnchorPane.topAnchor="179.0" />
+      <TextField fx:id="student_instructor_number" layoutX="267.0" layoutY="105.0" prefHeight="26.0" prefWidth="173.0" promptText="student/instructor number" />
+      <TextField fx:id="password" layoutX="43.0" layoutY="105.0" promptText="password" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="105.0" />
+      <Label layoutX="43.0" layoutY="15.0" prefHeight="26.0" prefWidth="149.0" text="user name" />
+      <Label layoutX="268.0" layoutY="84.0" text="if you are a student or instructor enter your id..." />
+      <Label layoutX="268.0" layoutY="304.0" />
+      <TextField fx:id="uni_job" layoutX="266.0" layoutY="179.0" prefHeight="26.0" prefWidth="174.0" promptText="university name or job" />
+      <Button fx:id="commitBtn" layoutX="502.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#commit" prefHeight="54.0" prefWidth="157.0" style="-fx-background-color: #6497b1;" text="commit">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <Label layoutX="267.0" layoutY="157.0" prefHeight="26.0" prefWidth="399.0" text="if you are a student or instructor enter your uni otherwise enter your job..." />
+      <Label layoutX="43.0" layoutY="84.0" text="password" />
+      <Label layoutX="43.0" layoutY="161.0" text="national id" />
+      <Label layoutX="42.0" layoutY="230.0" text="first name" />
+      <Label layoutX="43.0" layoutY="299.0" prefHeight="26.0" prefWidth="149.0" text="last name" />
+      <Label layoutX="266.0" layoutY="230.0" text="add phone number" />
+      <TextField fx:id="phone_number1" layoutX="267.0" layoutY="257.0" prefHeight="26.0" prefWidth="174.0" promptText="phone number 1" />
+      <TextField fx:id="phone_number2" layoutX="478.0" layoutY="257.0" prefHeight="26.0" prefWidth="174.0" promptText="phone number 2 (optional)" />
+      <Label layoutX="268.0" layoutY="304.0" text="add address " />
+      <TextField fx:id="address1" layoutX="267.0" layoutY="321.0" prefHeight="26.0" prefWidth="174.0" promptText="address1" />
+      <TextField fx:id="address2" layoutX="478.0" layoutY="321.0" prefHeight="26.0" prefWidth="174.0" promptText="address2(optional)" />
+      <TextField fx:id="state" layoutX="263.0" layoutY="48.0" prefHeight="26.0" prefWidth="174.0" promptText="state" />
+      <Label layoutX="261.0" layoutY="15.0" prefHeight="26.0" prefWidth="234.0" text="choose regular / instructor or student" />
+   </children>
+</AnchorPane>

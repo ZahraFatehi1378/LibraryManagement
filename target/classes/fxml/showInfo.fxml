@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ShowInfoController">
+   <children>
+      <Label layoutX="33.0" layoutY="500.0" prefHeight="181.0" prefWidth="838.0" style="-fx-background-color: #adcbe3;" />
+      <Label layoutX="37.0" layoutY="17.0" prefHeight="434.0" prefWidth="838.0" style="-fx-background-color: #adcbe3;" />
+      <Label layoutX="58.0" layoutY="301.0" text="national id" />
+      <Label layoutX="109.0" layoutY="581.0" text="username" />
+      <Label layoutX="422.0" layoutY="581.0" prefHeight="18.0" prefWidth="52.0" text="password" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="426.0" />
+      <Label layoutX="509.0" layoutY="53.0" text="account balance" />
+      <Label layoutX="705.0" layoutY="581.0" text="created date" />
+      <Label layoutX="60.0" layoutY="131.0" text="first name" />
+      <Label layoutX="61.0" layoutY="207.0" text="last name" />
+      <Label layoutX="515.0" layoutY="300.0" text="phone1" />
+      <Label layoutX="511.0" layoutY="131.0" text="address1" />
+      <Label layoutX="59.0" layoutY="391.0" text="state informations" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="741.0" />
+      <TextArea fx:id="firstname" layoutX="193.0" layoutY="121.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="account_balance" layoutX="648.0" layoutY="43.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="address1" layoutX="648.0" layoutY="121.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="national_id" layoutX="193.0" layoutY="290.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="state_info" layoutX="193.0" layoutY="381.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="phone1" layoutX="648.0" layoutY="289.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="phone2" layoutX="648.0" layoutY="381.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="lastname" layoutX="193.0" layoutY="197.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="address2" layoutX="648.0" layoutY="205.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <Label layoutX="511.0" layoutY="207.0" text="address2" />
+      <Label layoutX="515.0" layoutY="391.0" text="phone2" />
+      <Label layoutX="73.0" layoutY="44.0" text="personal information">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="73.0" layoutY="516.0" text="system information">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="username" layoutX="59.0" layoutY="614.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="password" layoutX="356.0" layoutY="614.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+      <TextArea fx:id="created_date" layoutX="648.0" layoutY="614.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #4b86b4;" />
+   </children>
+</AnchorPane>

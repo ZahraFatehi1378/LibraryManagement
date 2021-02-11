@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.controller.ReturnBook"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <TextField fx:id="book_id" layoutX="123.0" layoutY="71.0" promptText="book id" />
+        <Button fx:id="commit" layoutX="272.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#commit" text="commot" />
+    </children>
+</AnchorPane>

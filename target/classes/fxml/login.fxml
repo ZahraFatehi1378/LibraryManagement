@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.LoginController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="332.0" fitWidth="236.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/login.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="34.0" prefHeight="210.0" prefWidth="317.0" style="-fx-background-color: #adcbe3;" />
+            <TextField fx:id="username" layoutX="37.0" layoutY="68.0" prefHeight="24.0" prefWidth="270.0" promptText="username" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="42.200000000000045" />
+            <TextField fx:id="password" layoutX="37.0" layoutY="120.0" prefHeight="22.0" prefWidth="270.0" promptText="password" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="42.200000000000045" />
+            <Button fx:id="login" layoutX="37.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#loginListener" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: #6497b1;" text="login" textFill="#2a4d69" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="42.200000000000045">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="15.0" layoutY="261.0" prefHeight="97.0" prefWidth="317.0" style="-fx-background-color: #adcbe3;" />
+            <Button fx:id="signup" layoutX="121.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#signupListener" prefHeight="6.0" prefWidth="102.0" style="-fx-background-color: #6497b1;" text="sign up" textFill="#2a4d69">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="47.0" layoutY="285.0" prefHeight="18.0" prefWidth="275.0" text="if you don't have any account , you need to sign up first.">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </right>
+</BorderPane>
