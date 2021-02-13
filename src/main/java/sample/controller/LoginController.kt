@@ -55,7 +55,7 @@ class LoginController : Initializable {
                     e.printStackTrace()
                 }
                 primaryStage.title = "signup"
-                primaryStage.scene = Scene(root, 1000.0, 700.0)
+                primaryStage.scene = Scene(root, 1064.0, 640.0)
                 primaryStage.show()
             } else if (libraryConnection.getInfo(token, "" ,"")?.get(0)?.state == "librarian") {
                 try {
@@ -64,7 +64,7 @@ class LoginController : Initializable {
                     e.printStackTrace()
                 }
                 primaryStage.title = "signup"
-                primaryStage.scene = Scene(root, 1000.0, 700.0)
+                primaryStage.scene = Scene(root, 1064.0, 640.0)
                 primaryStage.show()
 
             } else {

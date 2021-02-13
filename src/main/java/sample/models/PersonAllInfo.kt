@@ -1,6 +1,6 @@
 package sample.models
 
-class PersonAllInfo(
+data class PersonAllInfo(
     var username: String? = null,
     var password: String? = null,
     var account_balance: String? = null,
@@ -13,4 +13,4 @@ class PersonAllInfo(
     var phone_number: String? = null,
     var address: String? = null,
     var state: String
-){}
+)

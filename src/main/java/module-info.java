@@ -6,6 +6,7 @@ module LibraryManagement {
     requires kotlin.stdlib;
     requires java.sql;
 
+    opens sample.models to javafx.base;
    opens sample.controller to javafx.fxml;
    opens sample;
 }

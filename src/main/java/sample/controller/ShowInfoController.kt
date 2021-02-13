@@ -54,9 +54,9 @@ class ShowInfoController :Initializable{
         firstname?.text = list?.get(0)?.name_first_name
         lastname?.text = list?.get(0)?.name_last_name
         phone1?.text = list?.get(0)?.phone_number
-        phone2?.text = list?.get(1)?.phone_number
+        if (list?.size!! > 1) phone2?.text = list?.get(1)?.phone_number
         address1?.text = list?.get(0)?.address
-        address2?.text = list?.get(1)?.address
+        if (list?.size!! > 1) address2?.text = list?.get(1)?.address
         account_balance?.text = list?.get(0)?.account_balance
         state_info?.text = "${list?.get(0)?.state } : ${list?.get(0)?.student_id } _ ${list?.get(0)?.univercity_name }"
         created_date?.text = list?.get(0)?.create_date

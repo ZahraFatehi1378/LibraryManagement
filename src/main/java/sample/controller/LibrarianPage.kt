@@ -1,25 +1,23 @@
 package sample.controller
 
 import connections.LibraryConnection
+import javafx.concurrent.Task
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
-import javafx.scene.control.TextArea
-import javafx.scene.control.TextField
+import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseEvent
 import javafx.stage.Stage
+import sample.models.BookModel
+import sample.models.PersonAllInfo
 import java.io.IOException
 import java.net.URL
 import java.util.*
 
-class LibrarianPage : Initializable {
-    override fun initialize(location: URL?, resources: ResourceBundle?) {
-    }
-
+open class LibrarianPage : Initializable {
 
     @FXML
     var information: Button? = null
@@ -27,9 +25,8 @@ class LibrarianPage : Initializable {
     @FXML
     var add_book: Button? = null
 
-
     @FXML
-    var search_member_pass: Button? = null
+    var search_member_lastname: Button? = null
 
     @FXML
     var search_member_username: Button? = null
@@ -61,16 +58,18 @@ class LibrarianPage : Initializable {
     var price: TextField? = null
 
     @FXML
+    var username: TextField? = null
+
+    @FXML
     var search_with: TextField? = null
 
     @FXML
-    var txt_area: TextArea? = null
+    var table: TableView<PersonAllInfo>? = null
 
     var libraryConnection = LibraryConnection()
 
     @FXML
     fun getInfo(event: MouseEvent) {
-
 
         val primaryStage = Stage()
         var root: Parent? = null
@@ -93,29 +92,72 @@ class LibrarianPage : Initializable {
             , publish_year?.text.toString() )
     }
 
+    @FXML
+    fun deleteUser(event: MouseEvent) {
+        var result =libraryConnection.deleteUser(username?.text.toString())
 
-
+        val alert = Alert(Alert.AlertType.INFORMATION)
+        alert.contentText = result
+        alert.title = "you can not enter"
+        alert.show()
+    }
 
     @FXML
-    fun searchMember_pass(event: MouseEvent) {
-        libraryConnection.getInfo("" ,search_with?.text.toString() , "")
+    fun searchMember_lastname(event: MouseEvent) {
+
+        createTable(libraryConnection.getInfo("" , "",search_with?.text.toString()))
     }
 
     @FXML
     fun searchMember_username(event: MouseEvent) {
-        libraryConnection.getInfo("" , "",search_with?.text.toString())
 
+        createTable(libraryConnection.getInfo("" ,search_with?.text.toString() , ""))
     }
 
 
+    override fun initialize(location: URL?, resources: ResourceBundle?) {
+
+        table!!.columns!!.add(newClmn("Username","username"));
+        table!!.columns!!.add(newClmn("Password","password"));
+        table!!.columns!!.add(newClmn("First Name","name_first_name"));
+        table!!.columns!!.add(newClmn("Last Name","name_last_name"));
+        table!!.columns!!.add(newClmn("Account Balance","account_balance"));
+        table!!.columns!!.add(newClmn("National ID","national_id"));
+        table!!.columns!!.add(newClmn("Create Date","create_date"));
+        table!!.columns!!.add(newClmn("State","state"));
+        table!!.columns!!.add(newClmn("Address","address"));
+        table!!.columns!!.add(newClmn("Phone Number","phone_number"));
+    }
+
+    private fun createTable(info: List<PersonAllInfo>?) {
+        table!!.items.clear()
+        if (info != null) {
+            for (a in info){
+                println(a);
+                table!!.items.add(a);
+            }
+        }
+    }
+
+    private fun newClmn(name: String,field: String) : TableColumn<PersonAllInfo,String> {
+        val clmn = TableColumn<PersonAllInfo,String>(name)
+        clmn.cellValueFactory = PropertyValueFactory(field)
+        return clmn
+    }
+
     @FXML
     fun inbox(event: MouseEvent) {
-        var allTxt = libraryConnection.getInbox()
-        var txt =""
-        for (a in allTxt){
-            txt+="${a}\n"
+
+        val primaryStage = Stage()
+        var root: Parent? = null
+        try {
+            root = FXMLLoader.load(javaClass.getResource("/fxml/inbox.fxml"))
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
-        txt_area?.text  = txt
+        primaryStage.scene = Scene(root, 1000.0, 700.0)
+        primaryStage.show()
+
     }
 
     @FXML
@@ -131,4 +173,7 @@ class LibrarianPage : Initializable {
         var stage: Stage? = information?.scene?.window as Stage?
         stage?.close()
     }
+
+
+
 }

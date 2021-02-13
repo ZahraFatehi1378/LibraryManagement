@@ -5,12 +5,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.SearchController">
    <children>
-      <TextField fx:id="author" layoutX="49.0" layoutY="63.0" promptText="author" text="0" />
-      <TextField fx:id="title" layoutX="49.0" layoutY="26.0" promptText="title" text="0" />
-      <TextField fx:id="published_year" layoutX="49.0" layoutY="148.0" promptText="published year" text="0" />
-      <TextField fx:id="book_num" layoutX="49.0" layoutY="107.0" promptText="book number" text="0" />
-      <TextField fx:id="category" layoutX="49.0" layoutY="187.0" promptText="category" text="0" />
+      <TextField fx:id="author" layoutX="123.0" layoutY="64.0" promptText="author" text="0" />
+      <TextField fx:id="title" layoutX="123.0" layoutY="24.0" promptText="title" text="0" />
+      <TextField fx:id="published_year" layoutX="123.0" layoutY="147.0" promptText="published year" text="0" />
+      <TextField fx:id="book_num" layoutX="123.0" layoutY="105.0" promptText="book number" text="0" />
       <Button layoutX="98.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#search" text="search" />
-      <TextArea fx:id="search_result" layoutX="255.0" layoutY="61.0" prefHeight="313.0" prefWidth="306.0" />
+      <TableView fx:id="table" layoutX="278.0" layoutY="6.0" prefHeight="412.0" prefWidth="549.0" />
+      <Label layoutX="18.0" layoutY="27.0" prefHeight="18.0" prefWidth="80.0" text="title" />
+      <Label layoutX="18.0" layoutY="64.0" prefHeight="18.0" prefWidth="91.0" text="author" />
+      <Label layoutX="18.0" layoutY="109.0" prefHeight="18.0" prefWidth="91.0" text="book number" />
+      <Label layoutX="18.0" layoutY="151.0" prefHeight="18.0" prefWidth="80.0" text="published year" />
    </children>
 </AnchorPane>

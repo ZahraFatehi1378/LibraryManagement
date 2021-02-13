@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="639.0" prefWidth="1064.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ManagerPage">
+<AnchorPane prefHeight="639.0" prefWidth="1064.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ManagerPage">
 
     <children>
         <Button fx:id="information" layoutX="841.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#getInfo" prefHeight="50.0" prefWidth="186.0" style="-fx-background-color: #b3cde0;" text="your informations" AnchorPane.bottomAnchor="156.60000000000002">
@@ -24,7 +22,7 @@
                 <Font name="System Bold" size="11.0" />
             </font>
         </Button>
-        <Button fx:id="search_member_username" layoutX="841.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#searchMember_pass" prefHeight="51.0" prefWidth="186.0" style="-fx-background-color: #6497b1;" text="search member with username">
+        <Button fx:id="search_member_username" layoutX="841.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#searchMember_username" prefHeight="51.0" prefWidth="186.0" style="-fx-background-color: #6497b1;" text="search member with username">
             <font>
                 <Font name="System Bold" size="11.0" />
             </font>
@@ -40,7 +38,7 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-      <Button fx:id="search_member_pass" layoutX="841.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#searchMember_username" prefHeight="51.0" prefWidth="186.0" style="-fx-background-color: #6497b1;" text="search member with password">
+      <Button fx:id="search_member_lastname" layoutX="841.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#searchMember_lastname" prefHeight="51.0" prefWidth="186.0" style="-fx-background-color: #6497b1;" text="search member with lastname">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
@@ -54,8 +52,8 @@
       <TextField fx:id="title" layoutX="131.0" layoutY="25.0" prefHeight="35.0" prefWidth="95.0" promptText="title" />
       <TextField fx:id="publish_year" layoutX="803.0" layoutY="25.0" prefHeight="35.0" prefWidth="95.0" promptText="publish year" />
       <TextField fx:id="username" layoutX="803.0" layoutY="80.0" prefHeight="35.0" prefWidth="95.0" promptText="username" />
-      <TextArea fx:id="txt_area" layoutX="9.0" layoutY="81.0" prefHeight="534.0" prefWidth="771.0" />
       <TextField fx:id="search_with" layoutX="886.0" layoutY="320.0" prefHeight="35.0" prefWidth="95.0" promptText="search with" />
+      <TableView fx:id="table" layoutX="9.0" layoutY="83.0" prefHeight="475.0" prefWidth="767.0"/>
     </children>
 
 </AnchorPane>

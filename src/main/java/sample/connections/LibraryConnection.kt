@@ -2,6 +2,7 @@ package connections
 
 import javafx.fxml.FXML
 import sample.controller.LoginController.Companion.token
+import sample.models.BookModel
 import sample.models.PersonAllInfo
 import sample.models.TxtModel
 import java.sql.*
@@ -84,23 +85,23 @@ class LibraryConnection {
         phone2: String,
         address1: String,
         address2: String
-    ) {
+    ) :String{
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
+        var result=""
 
         try {
             stmt = conn!!.createStatement()
-            stmt!!.executeUpdate(
+            resultset =stmt!!.executeQuery(
                 "call create_account('${username}' , '${password}' , ${national_id} " +
                         ", '${firstname}' , '${lastname}' ,${student_instructor_id} , '${university_job}' , '${user_state}'," +
                         "'${phone1}','${phone2}','${address1}','${address2}');"
             )
-            //         stmt!!.executeUpdate("call create_account('fateeeehi' , 'sefeeewfewf52' , 76454238 , 'mmdf' , 'fatesgh' ,32453 , 'amirkabir' , 'student' , 12324434 , 123134,'ffre','rref');")
 
-//            while (resultset!!.next()) {
-//             //   println(resultset.getString("Database"))
-//            }
+            while (resultset!!.next()) {
+             result = resultset.getString("your_error")
+            }
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } finally {
@@ -122,13 +123,16 @@ class LibraryConnection {
             }
 
         }
+        return result
     }
 
     fun getInfo(token: String?, searchWithUsername: String, searchWithLastname: String): List<PersonAllInfo>? {
-        var state = getPersonState(token)
-        if (state == "") {
-            return null
-        }
+        println("username ${searchWithLastname}")
+
+        var state = ""
+        if (token!= "")
+            state = getPersonState(token, "")
+
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
@@ -140,15 +144,24 @@ class LibraryConnection {
             if (token != "")
                 resultset = stmt!!.executeQuery("call getAllInfo('${token}');")
 
-            if (searchWithUsername != "")
+            if (searchWithUsername != "") {
                 resultset = stmt!!.executeQuery("call search_users_personal_info_username('${searchWithUsername}');")
+                state = "1"
+            }
 
-            if (searchWithLastname != "")
+            if (searchWithLastname != "") {
                 resultset = stmt!!.executeQuery("call search_users_personal_info_lastname('${searchWithLastname}');")
+                state = "1"
+            }
 
-            when (state) {
-                "student" -> {
-                    while (resultset!!.next()) {
+
+            while (resultset!!.next()) {
+                if (state == "1") {
+                    state = getPersonState("", resultset.getString("national_id"))
+                }
+
+                when (state) {
+                    "student" -> {
                         val personAllInfo = PersonAllInfo(
                             resultset.getString("username"),
                             resultset.getString("password"),
@@ -165,9 +178,7 @@ class LibraryConnection {
                         )
                         list.add(personAllInfo)
                     }
-                }
-                "instructor" -> {
-                    while (resultset!!.next()) {
+                    "instructor" -> {
                         val personAllInfo = PersonAllInfo(
                             resultset.getString("username"),
                             resultset.getString("password"),
@@ -184,9 +195,8 @@ class LibraryConnection {
                         )
                         list.add(personAllInfo)
                     }
-                }
-                "regular" -> {
-                    while (resultset!!.next()) {
+                    "regular" -> {
+
                         val personAllInfo = PersonAllInfo(
                             resultset.getString("username"),
                             resultset.getString("password"),
@@ -203,9 +213,7 @@ class LibraryConnection {
                         )
                         list.add(personAllInfo)
                     }
-                }
-                "librarian" -> {
-                    while (resultset!!.next()) {
+                    "librarian" -> {
                         val personAllInfo = PersonAllInfo(
                             resultset.getString("username"),
                             resultset.getString("password"),
@@ -221,10 +229,9 @@ class LibraryConnection {
                             "librarian"
                         )
                         list.add(personAllInfo)
+                        println(list)
                     }
-                }
-                "manager" -> {
-                    while (resultset!!.next()) {
+                    "manager" -> {
                         val personAllInfo = PersonAllInfo(
                             resultset.getString("username"),
                             resultset.getString("password"),
@@ -264,23 +271,33 @@ class LibraryConnection {
             }
 
         }
+        println(list)
         return list
     }
 
 
-    fun getPersonState(token: String?): String {
+    fun getPersonState(token: String?, national_id: String): String {
         getConnection()
+        println("national id ${national_id}")
+
         var stmt: Statement? = null
         var resultset: ResultSet? = null
         var state = ""
 
         try {
             stmt = conn.createStatement()
-            resultset = stmt!!.executeQuery("call get_person_state('${token}');")
-            val list: MutableList<PersonAllInfo> = ArrayList()
+            if (token != "")
+                resultset = stmt!!.executeQuery("call get_person_state('${token}');")
+            if (national_id != "") {
+                println("national id ${national_id}")
+                resultset = stmt!!.executeQuery("call getPersonStateViaNationalId('${national_id}');")
+            }
 
+
+            println("${resultset} //////////////////")
             while (resultset!!.next()) {
-                state = resultset.getString("person_state")
+                if (resultset.getString("person_state") != null)
+                    state = resultset.getString("person_state")
 
             }
         } catch (ex: SQLException) {
@@ -349,20 +366,42 @@ class LibraryConnection {
         return state
     }
 
-    fun search(author: String, title: String, published_year: String, book_num: String, category: String) {
+    fun search(author: String, title: String, published_year: String, book_num: String): MutableList<BookModel> {
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
         var state = ""
+        val list: MutableList<BookModel> = ArrayList()
 
         try {
             stmt = conn.createStatement()
-            resultset =
-                stmt!!.executeQuery("call search_book('${title}', '${author}' ,'${book_num}', '${published_year}' ,'${category}');")
-            val list: MutableList<PersonAllInfo> = ArrayList()
+            if (title =="0" && author =="0")
+                resultset = stmt!!.executeQuery("call search_book(${title}, ${author} ,${book_num}, ${published_year});")
+            else if (title =="0" ) {
+                print("call search_book(${title}, '${author}' ,${book_num}, ${published_year});")
+                resultset =
+                    stmt!!.executeQuery("call search_book(${title}, '${author}' ,${book_num}, ${published_year});")
+            }
+            else if (title =="0" )
+                resultset = stmt!!.executeQuery("call search_book('${title}', ${author} ,${book_num}, ${published_year});")
+            else
+                resultset = stmt!!.executeQuery("call search_book('${title}', '${author}' ,${book_num}, ${published_year});")
 
             while (resultset!!.next()) {
-                state = resultset.getString("person_state")
+               var bookModel = BookModel(
+                   resultset.getString("book_number"),
+                   resultset.getString("title"),
+                   resultset.getString("category"),
+                   resultset.getString("pages"),
+                   resultset.getString("publisher_id"),
+                   resultset.getString("price"),
+                   resultset.getString("published_year"),
+                   resultset.getString("available"),
+                   resultset.getString("author_id"),
+                   resultset.getString("name"),
+
+                   )
+                list.add(bookModel)
 
             }
         } catch (ex: SQLException) {
@@ -384,15 +423,15 @@ class LibraryConnection {
                 }
                 stmt = null
             }
-
         }
+        return list
     }
 
-    fun borrow(bookId: String, bookIssue: String) {
+    fun borrow(bookId: String, bookIssue: String):String {
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
-        var state = ""
+        var result = ""
 
         try {
             stmt = conn.createStatement()
@@ -400,7 +439,7 @@ class LibraryConnection {
             val list: MutableList<PersonAllInfo> = ArrayList()
 
             while (resultset!!.next()) {
-                state = resultset.getString("person_state")
+                result = resultset.getString("result")
 
             }
         } catch (ex: SQLException) {
@@ -424,21 +463,21 @@ class LibraryConnection {
             }
 
         }
+        return result
     }
 
-    fun returnBook(bookId: String) {
+    fun returnBook(bookId: String): String {
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
-        var state = ""
+        var result = ""
 
         try {
             stmt = conn.createStatement()
             resultset = stmt!!.executeQuery("call returnBookP('${token}',${bookId});")
-            val list: MutableList<PersonAllInfo> = ArrayList()
 
             while (resultset!!.next()) {
-                state = resultset.getString("person_state")
+                result = resultset.getString("result")
 
             }
         } catch (ex: SQLException) {
@@ -462,6 +501,7 @@ class LibraryConnection {
             }
 
         }
+        return result
     }
 
     fun logOut(): String {
@@ -503,12 +543,12 @@ class LibraryConnection {
         return state
     }
 
-    fun getInbox(): List<String> {
+    fun getInbox(): List<TxtModel> {
 
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
-        val list: MutableList<String> = ArrayList()
+        val list: MutableList<TxtModel> = ArrayList()
 
         try {
             stmt = conn.createStatement()
@@ -516,7 +556,8 @@ class LibraryConnection {
             resultset = stmt!!.executeQuery("call get_inbox_info();")
 
             while (resultset!!.next()) {
-                list.add(resultset.getString("txt"))
+                var txtModel=TxtModel(resultset.getString("txt"))
+                list.add(txtModel)
 
             }
         } catch (ex: SQLException) {
@@ -543,15 +584,20 @@ class LibraryConnection {
         return list
     }
 
-    fun deleteUser(username: String?) {
+    fun deleteUser(username: String?) :String{
+        var result=""
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
-        var state = ""
 
         try {
             stmt = conn.createStatement()
-            stmt!!.executeUpdate("call delete_user('${username}');")
+            resultset = stmt!!.executeQuery("call delete_user('${username}');")
+
+            while (resultset!!.next()) {
+                result = resultset.getString("result")
+
+            }
 
         } catch (ex: SQLException) {
             ex.printStackTrace()
@@ -574,23 +620,29 @@ class LibraryConnection {
             }
 
         }
+        return result
     }
 
     fun addBook(
         author_name: String, title: String,
         publisher_id: String, price: String, pages: String,
         book_number: String, category: String, publish_year: String
-    ) {
+    ): String {
 
         getConnection()
         var stmt: Statement? = null
         var resultset: ResultSet? = null
-        var state = ""
+        var result = ""
 
         try {
             stmt = conn.createStatement()
-            stmt!!.executeUpdate("call add_book(${book_number},'${title}','${category}',${pages},${publisher_id} ,${price} , '${author_name}'  , ${publish_year});")
+            resultset =
+                stmt!!.executeQuery("call add_book(${book_number},'${title}','${category}',${pages},${publisher_id} ,${price} , '${author_name}'  , ${publish_year});")
 
+            while (resultset!!.next()) {
+                result = resultset.getString("result")
+
+            }
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } finally {
@@ -612,5 +664,6 @@ class LibraryConnection {
             }
 
         }
+        return result
     }
 }

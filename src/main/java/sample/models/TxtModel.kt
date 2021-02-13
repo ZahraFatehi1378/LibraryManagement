@@ -1,4 +1,3 @@
 package sample.models
 
-class TxtModel (txt:String){
-}
+data class TxtModel (val txt:String)
